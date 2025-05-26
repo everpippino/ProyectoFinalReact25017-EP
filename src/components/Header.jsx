@@ -1,39 +1,19 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Navbar, Nav, Container, Button } from 'react-bootstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+// --- src/components/Header.jsx ---
+import React from 'react'; // Importa React
+import { Link } from 'react-router-dom'; // Importa Link de React Router para la navegación
+import Navbar from './Navbar'; // Importa el componente Navbar (asumiendo que está en la misma carpeta)
 
-const Header = () => {
-  return (
-    <Navbar bg="dark" variant="dark" expand="lg" className="mb-4">
-      <Container>       
-        <Navbar.Brand as={Link} to="/" className="d-flex align-items-center">
-          <img
-            src="https://via.placeholder.com/40" 
-            alt="Logo"
-            className="d-inline-block align-top me-2"
-          />
-          <span>Todo por 2 pesos - Lo mejor de Capussoto</span>
-        </Navbar.Brand>
-
-        <Nav className="ms-auto align-items-center">
-          <Nav.Link as={Link} to="/" className="me-3">Home</Nav.Link>
-          <Nav.Link as={Link} to="/ofertas" className="me-3">Ofertas</Nav.Link>
-          <Nav.Link as={Link} to="/infaltables" className="me-3">Infaltables</Nav.Link>
-
-          <div className="d-flex align-items-center">
-            <Button variant="outline-light" as={Link} to="/administracion" className="me-2">
-              Administración
-            </Button>
-            <Link to="/carrito" className="text-white">
-              <FontAwesomeIcon icon={faShoppingCart} size="lg" />
-            </Link>
-          </div>
-        </Nav>
-      </Container>
-    </Navbar>
-  );
-};
+const Header = () => (
+  <header className="bg-primary py-3 shadow-sm"> {/* Header con fondo primario de Bootstrap y sombra */}
+    <div className="container d-flex justify-content-between align-items-center"> {/* Contenedor de Bootstrap con flexbox para alinear elementos */}
+      <h1 className="h3 text-white mb-0"> {/* Título de la tienda */}
+        <Link to="/" className="text-white text-decoration-none"> {/* Enlace al inicio */}
+          DoggyShop 🐾
+        </Link>
+      </h1>
+      <Navbar /> {/* Renderiza el componente Navbar */}
+    </div>
+  </header>
+);
 
 export default Header;
