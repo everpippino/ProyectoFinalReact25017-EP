@@ -1,7 +1,6 @@
 // --- src/components/Layout.jsx ---
-import React from 'react';
-import Header from './Header'; // Importa el componente Header
-import Footer from './Footer'; // Importa el componente Footer
+import Header from './Header'
+import Footer from './Footer'
 
 const Layout = ({ children }) => (
   <div className="d-flex flex-column min-vh-100">

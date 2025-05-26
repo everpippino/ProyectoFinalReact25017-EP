@@ -3,22 +3,19 @@ import { Link, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../context/AuthContext'
 
 const LoginPage = () => {
-  const [username, setUsername] = useState('') // Estado para el nombre de usuario
-  const [password, setPassword] = useState('') // Estado para la contraseña
-  const { login } = useContext(AuthContext) // Obtiene la función de login del contexto
-  const navigate = useNavigate() // Hook para la navegación programática
+  const [username, setUsername] = useState('') 
+  const [password, setPassword] = useState('')
+  const { login } = useContext(AuthContext) 
+  const navigate = useNavigate() 
 
-  // Maneja el envío del formulario de inicio de sesión
   const handleSubmit = (e) => {
-    e.preventDefault() // Previene el comportamiento por defecto del formulario
-    if (login(username, password)) { // Intenta iniciar sesión
-      navigate('/dashboard') // Si el login es exitoso, redirige al dashboard
+    e.preventDefault() 
+    if (login(username, password)) { 
+      navigate('/dashboard') 
     }
-    // Las alertas de éxito o error se manejan dentro de la función `login` en AuthContext
   }
 
   return (
-    // Contenedor principal del formulario de inicio de sesión con estilos de Bootstrap
     <div className="card shadow-sm p-4 mx-auto mt-5" style={{ maxWidth: '400px' }}>
       <h2 className="h4 fw-bold text-dark mb-4 text-center">Iniciar Sesión</h2>
       <form onSubmit={handleSubmit}>
@@ -29,10 +26,10 @@ const LoginPage = () => {
           <input
             type="text"
             id="username"
-            className="form-control" // Clase de Bootstrap para el input
+            className="form-control" 
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            required // Campo requerido
+            required 
           />
         </div>
         <div className="mb-4">
@@ -42,20 +39,19 @@ const LoginPage = () => {
           <input
             type="password"
             id="password"
-            className="form-control" // Clase de Bootstrap para el input
+            className="form-control"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            required // Campo requerido
+            required
           />
         </div>
         <div className="d-flex justify-content-between align-items-center">
           <button
             type="submit"
-            className="btn btn-primary" // Estilos de botón de Bootstrap
+            className="btn btn-primary"
           >
             Iniciar Sesión
-          </button>
-          {/* Enlace a la página de registro usando Link de React Router */}
+          </button>     
           <Link to="/registro" className="text-decoration-none text-primary fw-bold small">
             ¿No tienes cuenta? Regístrate
           </Link>

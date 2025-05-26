@@ -1,4 +1,3 @@
-
 import { useContext } from 'react'
 import { ShoppingCart } from 'lucide-react'
 import CartItem from './CartItem'

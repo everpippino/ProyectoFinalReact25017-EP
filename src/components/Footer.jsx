@@ -1,56 +1,43 @@
-import React from 'react';
-import { Link } from 'react-router-dom'; // <-- Importa Link de react-router-dom
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faFacebook,
-  faTwitter,
-  faInstagram,
-  faLinkedin,
-  faGithub,
-  faWhatsapp
-} from '@fortawesome/free-brands-svg-icons';
-import { faEnvelope, faPhone, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faFacebook, faTwitter, faInstagram, faLinkedin, faGithub, faWhatsapp} from '@fortawesome/free-brands-svg-icons'
+import { faEnvelope, faPhone, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons'
 
 const Footer = () => {
   return (
     <footer className="bg-dark text-white pt-5 pb-4 mt-auto">
       <div className="container text-center text-md-start">
         <div className="row text-center text-md-start">
-
-          {/* Sección de Información de la Empresa/Marca */}
+         
           <div className="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
             <h5 className="text-uppercase mb-4 font-weight-bold text-primary">
-              The Dog API App
+              Doggy Shop
             </h5>
             <p>
               Explorando el fascinante mundo de nuestros amigos caninos. 
-              Encuentra información, imágenes y razas de perros con nuestra aplicación.
+              Encuentra información, imágenes y razas de perros en nuestro sitio.
             </p>
           </div>
 
           {/* Sección de Servicios/Categorías (usando Link para navegación interna) */}
           <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
             <h5 className="text-uppercase mb-4 font-weight-bold text-primary">
-              Nuestra App
+              Destacados
             </h5>
             <p><Link to="/breeds" className="text-white" style={{ textDecoration: 'none' }}>Galería de Razas</Link></p>
             <p><Link to="/random" className="text-white" style={{ textDecoration: 'none' }}>Imágenes Aleatorias</Link></p>
-            <p><Link to="/search" className="text-white" style={{ textDecoration: 'none' }}>Buscador de Perros</Link></p>
-            {/* Si tienes rutas específicas para estas funcionalidades, úsalas */}
+            <p><Link to="/search" className="text-white" style={{ textDecoration: 'none' }}>Buscador de Perros</Link></p>           
           </div>
-
-          {/* Sección de Enlaces Útiles (usando Link) */}
+         
           <div className="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
             <h5 className="text-uppercase mb-4 font-weight-bold text-primary">
               Enlaces Útiles
             </h5>
             <p><Link to="/profile" className="text-white" style={{ textDecoration: 'none' }}>Mi Perfil</Link></p>
             <p><Link to="/help" className="text-white" style={{ textDecoration: 'none' }}>Centro de Ayuda</Link></p>
-            <p><Link to="/contact" className="text-white" style={{ textDecoration: 'none' }}>Contacto</Link></p>
-            {/* Más enlaces internos */}
+            <p><Link to="/contact" className="text-white" style={{ textDecoration: 'none' }}>Contacto</Link></p>            
           </div>
-
-          {/* Sección de Contacto (información y WhatsApp con a) */}
+          
           <div className="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
             <h5 className="text-uppercase mb-4 font-weight-bold text-primary">
               Contacto
@@ -75,8 +62,7 @@ const Footer = () => {
               <FontAwesomeIcon icon={faWhatsapp} className="me-3" />
               <a href="https://wa.me/5491112345678" target="_blank" rel="noopener noreferrer" className="text-white" style={{ textDecoration: 'none' }}>
                 +54 9 11 1234-5678
-              </a>
-              {/* Ajusta este número de WhatsApp con el código de país y número local sin guiones */}
+              </a>            
             </p>
           </div>
         </div>
@@ -88,7 +74,7 @@ const Footer = () => {
           <div className="col-md-7 col-lg-8">
             <p className="text-center text-md-start">
               &copy; {new Date().getFullYear()} Todos los derechos reservados por:
-              <Link to="/" style={{ textDecoration: 'none' }}> {/* Enlace al inicio */}
+              <Link to="/" style={{ textDecoration: 'none' }}>
                 <strong className="text-primary"> Doggy Shop</strong>
               </Link>
             </p>

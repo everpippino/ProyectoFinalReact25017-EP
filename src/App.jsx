@@ -1,6 +1,4 @@
-// --- src/App.jsx (Componente Principal de la Aplicación) ---
-import React from 'react'; // Importa React
-import { BrowserRouter, Routes, Route } from 'react-router-dom'; // Importa componentes de React Router
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 // Importa los proveedores de contexto (exportados por defecto de sus archivos)
 import AuthProvider from './context/AuthProvider';
