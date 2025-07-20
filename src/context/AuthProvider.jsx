@@ -1,96 +1,120 @@
-
-import { useState} from 'react'
-import Swal from 'sweetalert2'
-import { useNavigate } from 'react-router-dom'
+import React, { useState, useEffect } from 'react';
 import { AuthContext } from './AuthContext';
+import { toast } from 'react-toastify';
 
 const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(() => {
     return localStorage.getItem('userToken') ? true : false;
   });
-  const [currentUser, setCurrentUser] = useState(() => {    
+  const [currentUser, setCurrentUser] = useState(() => {
     const user = localStorage.getItem('currentUser');
     return user ? JSON.parse(user) : null;
   });
 
- 
-  const navigate = useNavigate();
-
   const login = (username, password) => {
-    const registeredUsers = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
-    const foundUser = registeredUsers.find(u => u.username === username && u.password === password);
-
-    if (foundUser) {
-      const token = `fake-token-${username}`; 
+    if (username && password) {
+      const token = `fake-token-${username}`;
       const user = { username: username };
-      localStorage.setItem('userToken', token); 
+      localStorage.setItem('userToken', token);
       localStorage.setItem('currentUser', JSON.stringify(user));
-      setIsAuthenticated(true); 
-      setCurrentUser(user); 
-      Swal.fire({ 
-        icon: 'success',
-        title: '¡Bienvenido!',
-        text: `Has iniciado sesión como ${username}.`,
-        timer: 2000, 
-        showConfirmButton: false 
+      setIsAuthenticated(true);
+      setCurrentUser(user);
+      toast.success(`¡Bienvenido, ${username}!`, { 
+        position: "top-right",
+        autoClose: 1500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
       });
-      return true; 
-    } else {
-      
-      Swal.fire({ 
-        icon: 'error',
-        title: 'Error de inicio de sesión',
-        text: 'Usuario o contraseña incorrectos.',
-      });
-      return false; 
+      return true;
     }
+    toast.error('Nombre de usuario o contraseña incorrectos.', { 
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+    return false;
   };
 
   const register = (username, password) => {
     const existingUsers = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
     const userExists = existingUsers.some(u => u.username === username);
 
-    if (userExists) {      
-      Swal.fire({ 
-        icon: 'error',
-        title: 'Error de registro',
-        text: 'El usuario ya existe.',
+    if (userExists) {
+      toast.error('El usuario ya existe. Por favor, elige otro nombre de usuario.', { 
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
       });
       return false;
     }
-    
+
     const newUser = { username, password };
     localStorage.setItem('registeredUsers', JSON.stringify([...existingUsers, newUser]));
-    Swal.fire({ 
-      icon: 'success',
-      title: '¡Registro exitoso!',
-      text: 'Ahora puedes iniciar sesión con tu nueva cuenta.',
-      timer: 2000,
-      showConfirmButton: false
+    toast.success('¡Registro exitoso! Ahora puedes iniciar sesión.', { 
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
     });
     return true;
   };
 
-  const logout = () => {
-    localStorage.removeItem('userToken');
-    localStorage.removeItem('currentUser');
-    setIsAuthenticated(false); 
-    setCurrentUser(null); 
-    Swal.fire({
-      icon: 'info',
-      title: 'Sesión cerrada',
-      text: 'Has cerrado tu sesión.',
-      timer: 1500,
-      showConfirmButton: false
-    });    
-    navigate('/login');
+  const logout = () => {    
+    Swal.fire({ 
+      title: '¿Cerrar sesión?',
+      text: "¿Estás seguro de que quieres cerrar tu sesión?",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, cerrar sesión',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        localStorage.removeItem('userToken');
+        localStorage.removeItem('currentUser');
+        setIsAuthenticated(false);
+        setCurrentUser(null);
+        toast.info('Has cerrado tu sesión exitosamente.', { 
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
+    });
+  };
+
+  const authContextValue = {
+    isAuthenticated,
+    currentUser,
+    login,
+    register,
+    logout,
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, currentUser, login, register, logout }}>
+    <AuthContext.Provider value={authContextValue}>
       {children}
     </AuthContext.Provider>
   );
 };
 
-export default AuthProvider;
+export { AuthProvider };
